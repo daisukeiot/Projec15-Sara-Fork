@@ -4,6 +4,12 @@
 - Plug and Play model
 - Update ML model/Firmware with BLE connect app
 
+# Azure deploy
+
+Project 15 is quickly set up in Microsoft Azure by the provided ARM template. To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, notice the following changes:
+- url and branch in `PrivateModelRepo`
+- url for *webApp* and *functions* in `git-repo`
+
 # Added to P15
 - File upload to P15 IoT Hub (via Azure Function)
 - 
@@ -53,7 +59,7 @@ TODO: add this widget
 
 A PnP model describes what telemetry is expected and what actions can be made from cloud to device. An example of how the Elephant Edge collar device is easily managed with a PnP model is described.
 
-
+OpenCollarElephant model which is found at the [iot-plugandplay-models](https://github.com/SaraOlsson/iot-plugandplay-models/blob/main/dtmi/nordicsemi/OpenCollarElephant.json) repository
 
 # Update ML model/Firmware with BLE connect app
 

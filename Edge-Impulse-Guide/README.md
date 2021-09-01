@@ -6,7 +6,7 @@
 
 # Azure deploy
 
-Project 15 is quickly set up in Microsoft Azure by the provided ARM template. To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, notice the following changes:
+Project 15 is quickly set up in Microsoft Azure by the provided ARM template. To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, the following changes will direct to the demo code:
 - url and branch in `PrivateModelRepo`
 - url for *webApp* and *functions* in `git-repo`
 

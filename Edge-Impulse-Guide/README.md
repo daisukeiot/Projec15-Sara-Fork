@@ -26,8 +26,10 @@ Click **Deploy to Azure** button below
 > Right click the button below and select **Open link in new tab** or **Open lin in new window**
 
 # Added to P15
+- Module in Web Portal for Edge Impulse connection and actions (UI + backend)
+    - Sample project in Edge Impulse made public
 - File upload to P15 IoT Hub (via Azure Function)
-- 
+- (Functionallity to save telemetry to Storage Account and forward it to Edge Impulse) 
 
 # File upload (training data upload)
 - Enable File Upload in IoT Hub by connecting a Storage Account to it. 
@@ -38,8 +40,9 @@ Click **Deploy to Azure** button below
 
 This endpoint makes a POST request to `http://ingestion.edgeimpulse.com/api/training/data`
 
+# Get Edge Impulse model 
 
-# Get Edge Impulse model from backend
+(Download model from the Portal or backend)
 
 ## Edge Impulse API
 
@@ -76,6 +79,8 @@ OpenCollarElephant model which is found at the [iot-plugandplay-models](https://
 
 # Usage with Lora messages
 
-Azure IoT Hub integration at The Things Network
+Alternatives:
+- Azure IoT Hub integration at The Things Network
+- Use IoT Bridge by Azure (forward Lora messages with HTTP via Azure Function to IoT Hub) 
 
 # 

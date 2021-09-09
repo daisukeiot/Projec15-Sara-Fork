@@ -1,13 +1,27 @@
+
+
 # Introduction
 
 Project 15 enable efforts to quickly get started with a foundation for a IoT solution. Devices can be provisioned and managed trough the P15 portal and it displays live events and telemetry as text as well as with Time Series Insights and on map.  
 
 Added to the Open Platform is the integration of TinyML models to the managed devices, both the process of model training with Edge Impulse and manage the deployment with P15.
 
+![sketch](media/sketch.png)
+(draft image)
+
+# Use case
+
+(draft) Edge Impulse works together with Smart Parks, Irnas and others to analyze motion and sound data of Elephants to classify and generate events. This adds another layer to the very efficient GPS tracking and LoRaWAN connectivity of theOpen Collar.
+
+![sketch](media/OpenCollarElephantEdge.jpg)
+(temporary image?)
+
 ## Topics
 
+- Azure deploy of Open Platform
+- What is added to Open Platform in this guide
 - Connect Edge Impulse Project
-- Plug and Play model
+- Plug and Play models
 - Update ML model/Firmware with BLE connect app
 
 # Azure deploy
@@ -65,7 +79,8 @@ Choosing a model project will enable to
 - view model type and classes
 - build and prepare firmware for update of IoT device
 
-TODO: add this widget
+![sketch](media/ei-in-p15-1.png)
+(image will be updated)
 
 # Plug and Play model
 
@@ -75,7 +90,9 @@ OpenCollarElephant model which is found at the [iot-plugandplay-models](https://
 
 # Update ML model/Firmware with BLE connect app
 
-
+(draft)
+- download built firmware from Edge Impulse
+- use supported microcontroller with Bluetooth
 
 # Usage with Lora messages
 
@@ -83,4 +100,4 @@ Alternatives:
 - Azure IoT Hub integration at The Things Network
 - Use IoT Bridge by Azure (forward Lora messages with HTTP via Azure Function to IoT Hub) 
 
-# 
+![sketch](media/thethings.png)

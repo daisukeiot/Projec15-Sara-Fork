@@ -6,25 +6,46 @@ Project 15 enable efforts to quickly get started with a foundation for a IoT sol
 
 Added to the Open Platform is the integration of TinyML models to the managed devices, both the process of model training with Edge Impulse and manage the deployment with P15.
 
-![sketch](media/sketch.png)
-(draft image)
-
-# Use case
-
-(draft) Edge Impulse works together with Smart Parks, Irnas and others to analyze motion and sound data of Elephants to classify and generate events. This adds another layer to the very efficient GPS tracking and LoRaWAN connectivity of theOpen Collar.
-
-![sketch](media/OpenCollarElephantEdge.jpg)
-(temporary image?)
-
 ## Topics
 
+- Firmware scenarios
+- Use case
 - Azure deploy of Open Platform
 - What is added to Open Platform in this guide
 - Connect Edge Impulse Project
 - Plug and Play models
-- Update ML model/Firmware with BLE connect app
+- Update ML model/Firmware with BLE connect app  
 
-# Azure deploy
+![sketch](media/sketch.png)
+(draft image)
+
+
+## Firmware scenarios
+
+Two types of firmware
+- 1. outputting raw data that is suitable to collect training data
+    - while this data is streaming, tooling like the data-forwarder by Edge Impulse is sampling the data to gather sequences of data, e.g. 2 seconds of accelerometer data and label it. 
+- 2. optimized firmware to analyze the raw data *on device* to send only events to the cloud.
+
+## Use case - SmartParks
+
+(draft) Edge Impulse works together with Smart Parks, Irnas and others to analyze motion and sound data of Elephants to classify and generate events. This adds another layer to the very efficient GPS tracking and LoRaWAN connectivity of the OpenCollar.
+
+The collar hardware is based on the device *Nordic Semi nRF52840 DK* which is also compatible with Edge Impulse see [the documentation](https://docs.edgeimpulse.com/docs/nordic-semi-nrf52840-dk).
+
+The Edge Impulse firmware for this development board is open source and hosted on GitHub: [edgeimpulse/firmware-nrf52840-5340](https://github.com/edgeimpulse/firmware-nrf52840-5340).
+
+![sketch](media/OpenCollarElephantEdge.jpg)
+(temporary image?)
+
+### Public sample projects - Edge Impulse
+
+- [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
+
+
+# Guide - Integrate EI to Project 15
+
+## Azure deploy
 
 Project 15 is quickly set up in Microsoft Azure by the provided ARM template. To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, the following changes will direct to the demo code:
 - url and branch in `PrivateModelRepo`
@@ -39,13 +60,14 @@ Click **Deploy to Azure** button below
 > [!TIP]  
 > Right click the button below and select **Open link in new tab** or **Open lin in new window**
 
-# Added to P15
+
+### Added to P15
 - Module in Web Portal for Edge Impulse connection and actions (UI + backend)
     - Sample project in Edge Impulse made public
 - File upload to P15 IoT Hub (via Azure Function)
 - (Functionallity to save telemetry to Storage Account and forward it to Edge Impulse) 
 
-# File upload (training data upload)
+**File upload (training data upload)**
 - Enable File Upload in IoT Hub by connecting a Storage Account to it. 
 - Use added function in `project15-openplatform-functions` HTTP endpoint
 
@@ -71,7 +93,7 @@ In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-ap
     - *openmv* for OpenMV library 
     - *runner-linux-aarch64* for embedded Linux  
 
-# Connect Edge Impulse Project
+## Connect Edge Impulse Project
 
 Training of TinyML model takes place in the Edge Impulse studio. Added to P15-EI is a widget in the web portal to connect a Edge Impulse project by entering the project id. 
 
@@ -82,19 +104,23 @@ Choosing a model project will enable to
 ![sketch](media/ei-in-p15-1.png)
 (image will be updated)
 
-# Plug and Play model
+## Plug and Play model
 
 A PnP model describes what telemetry is expected and what actions can be made from cloud to device. An example of how the Elephant Edge collar device is easily managed with a PnP model is described.
 
 OpenCollarElephant model which is found at the [iot-plugandplay-models](https://github.com/SaraOlsson/iot-plugandplay-models/blob/main/dtmi/nordicsemi/OpenCollarElephant.json) repository
 
-# Update ML model/Firmware with BLE connect app
+## Update ML model/Firmware with BLE connect app
 
-(draft)
+Flashing firmware 
 - download built firmware from Edge Impulse
 - use supported microcontroller with Bluetooth
 
-# Usage with Lora messages
+# SmartParks integration highlights
+
+(todo)
+
+## Usage with Lora messages
 
 Alternatives:
 - Azure IoT Hub integration at The Things Network

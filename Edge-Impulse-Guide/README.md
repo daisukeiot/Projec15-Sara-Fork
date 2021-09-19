@@ -8,13 +8,18 @@ Added to the Open Platform is the integration of TinyML models to the managed de
 
 ## Topics
 
-- Firmware scenarios
-- Use case
+- Train and production scenarios
+- Use case - Smart Parks
 - Azure deploy of Open Platform
-- What is added to Open Platform in this guide
-- Connect Edge Impulse Project
+    - What is added to Open Platform in this guide
 - Plug and Play models
-- Update ML model/Firmware with BLE connect app  
+- Guide "Edge Impulse with P15":
+    - Connect Edge Impulse Project
+    - Set EI model to device twin
+    - Use Plug and Play (PnP) model
+- Update ML model/Firmware 
+    - With serial connector
+    - with BLE connect app  
 
 ![sketch](media/sketch.png)
 (draft image)
@@ -22,10 +27,16 @@ Added to the Open Platform is the integration of TinyML models to the managed de
 
 ## Firmware scenarios
 
-Two types of firmware
-- 1. outputting raw data that is suitable to collect training data
-    - while this data is streaming, tooling like the data-forwarder by Edge Impulse is sampling the data to gather sequences of data, e.g. 2 seconds of accelerometer data and label it. 
-- 2. optimized firmware to analyze the raw data *on device* to send only events to the cloud.
+Two types of firmware:
+1. Firmware outputting raw data to collect training data
+    - firmware as [edgeimpulse/example-dataforwarder-zephyr](https://github.com/edgeimpulse/example-dataforwarder-zephyr)
+    - while this data is streaming, tooling like the [data-forwarder by Edge Impulse](https://docs.edgeimpulse.com/docs/cli-data-forwarder) can sample the data to gather sequences of data, e.g. 2 seconds of accelerometer data and label it. 
+2. Firmware running inference: optimized firmware to analyze the raw data *on device* to send only events to the cloud.
+    - firmware as [edgeimpulse/firmware-nrf52840-5340-dk](https://github.com/edgeimpulse/firmware-nrf52840-5340-dk)
+
+![ei-inference-output](media/ei-inference-output.png)
+
+These two scenarios are often relevant to the same project, the data collection firmware in the development stage, and the optimized inference firmware in production mode.
 
 ## Use case - SmartParks
 
@@ -37,11 +48,6 @@ The Edge Impulse firmware for this development board is open source and hosted o
 
 ![sketch](media/OpenCollarElephantEdge.jpg)
 (temporary image?)
-
-### Public sample projects - Edge Impulse
-
-- [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
-
 
 # Guide - Integrate EI to Project 15
 
@@ -80,6 +86,11 @@ This endpoint makes a POST request to `http://ingestion.edgeimpulse.com/api/trai
 
 (Download model from the Portal or backend)
 
+Below are public made sample projects in the Edge Impulse Studio:
+
+- [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
+
+
 ## Edge Impulse API
 
 In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-api), we can use the [download endpoint](https://docs.edgeimpulse.com/reference#downloadbuild), where the *type* parameter implies which microcontroller the firmware is built for, or what library the model is packaged as. 
@@ -116,7 +127,7 @@ Flashing firmware
 - download built firmware from Edge Impulse
 - use supported microcontroller with Bluetooth
 
-# SmartParks integration highlights
+# SmartParks integration details
 
 (todo)
 

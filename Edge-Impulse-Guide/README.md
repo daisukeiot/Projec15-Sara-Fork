@@ -16,6 +16,9 @@ Added to the Open Platform is the integration of TinyML models to the managed de
 - Guide "Edge Impulse with P15":
     - Connect Edge Impulse Project
     - Set EI model to device twin
+    - Edge Impulse CLI (special version):
+        - Stream training Telemetry
+        - Stream inference Telemetry
     - Use Plug and Play (PnP) model
 - Update ML model/Firmware 
     - With serial connector
@@ -90,6 +93,17 @@ Below are public made sample projects in the Edge Impulse Studio:
 
 - [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
 
+## Edge Impulse CLI
+
+Adjusted version at GitHub: [SaraOlsson/edge-impulse-cli](https://github.com/SaraOlsson/edge-impulse-cli)
+
+Two tools are added to the CLI
+- edge-impulse-az-data-forwarder
+- edge-impulse-run-impulse-az-forwarder
+Which both forwards the data to an endpoint in the Project 15 backend.
+
+![View EI runner in Project 15 Portal](media/ei-runner-to-p15-portal-maxScore-long.png)
+*View EI runner in Project 15 Portal. Using this, it is possible to get time series insights on metrics, like the maximim score value over time. The dashed line will inform about lack of data/connectivity.*
 
 ## Edge Impulse API
 

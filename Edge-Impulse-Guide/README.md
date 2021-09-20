@@ -22,7 +22,12 @@ Added to the Open Platform is the integration of TinyML models to the managed de
     - Use Plug and Play (PnP) model
 - Update ML model/Firmware 
     - With serial connector
-    - with BLE connect app  
+    - with BLE connect app
+
+
+
+![sketch](media/ei-p15-2.png)
+(split to several and describe)
 
 ![sketch](media/sketch.png)
 (draft image)
@@ -40,6 +45,10 @@ Two types of firmware:
 ![ei-inference-output](media/ei-inference-output.png)
 
 These two scenarios are often relevant to the same project, the data collection firmware in the development stage, and the optimized inference firmware in production mode.
+
+### Device connectivity
+
+[Device communication protocols](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-protocols)
 
 ## Use case - SmartParks
 

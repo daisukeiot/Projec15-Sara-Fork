@@ -84,51 +84,21 @@ This endpoint makes a POST request to `http://ingestion.edgeimpulse.com/api/trai
 
 # Guide - Integrate EI to Project 15
 
-In this guide, the 
 
-## Azure deploy of Open Platform
+## Azure deploy of Open Platform (P15)
 
 Project 15 is quickly set up in Microsoft Azure by the provided ARM template. Ajustments done is covered in the section *What is added to Open Platform in this version*
 
-## 1. Open ARM Template Deployment
+### Open ARM Template Deployment
 
 Click **Deploy to Azure** button below. (TIP: right click the button below and select *Open link in new tab/window*) 
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSaraOlsson%2Fproject15%2Fmaster%2FEdge-Impulse-Guide%2Fazuredeploy.json" target="_blank"><img src="deploy-to-azure.svg"/></a>
 
 
-## Plug and Play models
+## Connect Edge Impulse Project to P15
 
-# Guide "Edge Impulse with P15":
-    - Connect Edge Impulse Project
-    - Set EI model to device twin
-    - Edge Impulse CLI (special version):
-        - Stream training Telemetry
-        - Stream inference Telemetry
-    - Use Plug and Play (PnP) model
-
-## Get Edge Impulse model 
-
-(Download model from the Portal or backend)
-
-Below are public made sample projects in the Edge Impulse Studio:
-
-- [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
-
-### Edge Impulse API
-
-In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-api), we can use the [download endpoint](https://docs.edgeimpulse.com/reference#downloadbuild), where the *type* parameter implies which microcontroller the firmware is built for, or what library the model is packaged as. 
-
-`https://studio.edgeimpulse.com/v1/api/{projectId}`
-
-- Get your project id from Edge Impulse studio.
-- Look up what *type* you need, for example: 
-    - *nordic-nrf52840-dk*  
-    - *zip* for C++ library  
-    - *openmv* for OpenMV library 
-    - *runner-linux-aarch64* for embedded Linux 
-
-## Connect Edge Impulse Project
+> Note that documentation about how to provision devices can be found at the project15 repo: [Connect IoT devices to the Open Platform](https://github.com/microsoft/project15/blob/master/Deploy/ConnectingDevice.md)
 
 Training of TinyML model takes place in the Edge Impulse studio. Added to P15-EI is a widget in the web portal to connect a Edge Impulse project by entering the project id. 
 
@@ -199,15 +169,36 @@ A PnP model describes what telemetry is expected and what actions can be made fr
 
 OpenCollarElephant model which is found at the [iot-plugandplay-models](https://github.com/SaraOlsson/iot-plugandplay-models/blob/main/dtmi/nordicsemi/OpenCollarElephant.json) repository
 
+## Get Edge Impulse model 
+
+(Download model from the Portal or backend)
+
+Below are public made sample projects in the Edge Impulse Studio:
+
+- [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
+
+### Edge Impulse API
+
+In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-api), we can use the [download endpoint](https://docs.edgeimpulse.com/reference#downloadbuild), where the *type* parameter implies which microcontroller the firmware is built for, or what library the model is packaged as. 
+
+`https://studio.edgeimpulse.com/v1/api/{projectId}`
+
+- Get your project id from Edge Impulse studio.
+- Look up what *type* you need, for example: 
+    - *nordic-nrf52840-dk*  
+    - *zip* for C++ library  
+    - *openmv* for OpenMV library 
+    - *runner-linux-aarch64* for embedded Linux
+
 ## Update ML model/Firmware with BLE connect app
 
-Flashing firmware 
-- download built firmware from Edge Impulse
-- use supported microcontroller with Bluetooth
+**Flashing firmware**
+- download built firmware from Edge Impulse or as library to build your custom firmware.
+- use microcontroller with Bluetooth or connect with over serial port.
 
 # SmartParks integration details
 
-(todo)
+(todo) Describe how messages where routed through Lora application to Azure IoT Hub in the Open Platform, how the telemetry can be translated into a PnP model. How the firmware is compatible with same device as Edge Impulse. How the SmartParks BLE connect app is used for DPU over the air.
 
 ## Usage with Lora messages
 

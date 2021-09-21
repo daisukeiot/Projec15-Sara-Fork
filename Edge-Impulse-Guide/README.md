@@ -6,14 +6,13 @@ Project 15 enable efforts to quickly get started with a foundation for a IoT sol
 
 Added to the Open Platform is the integration of TinyML models to the managed devices, both the process of model training with Edge Impulse and manage the deployment with P15.
 
-## Topics
+## Outline
 
 - Train and production scenarios
 - Use case - Smart Parks
-- Azure deploy of Open Platform
-    - What is added to Open Platform in this guide
-- Plug and Play models
+- What is added to Open Platform in this version
 - Guide "Edge Impulse with P15":
+    - Azure deploy of Open Platform
     - Connect Edge Impulse Project
     - Set EI model to device twin
     - Edge Impulse CLI (special version):
@@ -25,7 +24,6 @@ Added to the Open Platform is the integration of TinyML models to the managed de
     - with BLE connect app
 
 
-
 ![sketch](media/ei-p15-2.png)
 (split to several and describe)
 
@@ -33,7 +31,7 @@ Added to the Open Platform is the integration of TinyML models to the managed de
 (draft image)
 
 
-## Firmware scenarios
+## Train and production scenarios
 
 Two types of firmware:
 1. Firmware outputting raw data to collect training data
@@ -46,7 +44,7 @@ Two types of firmware:
 
 These two scenarios are often relevant to the same project, the data collection firmware in the development stage, and the optimized inference firmware in production mode.
 
-### Device connectivity
+### Device connectivity (move)
 
 [Device communication protocols](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-protocols)
 
@@ -61,31 +59,19 @@ The Edge Impulse firmware for this development board is open source and hosted o
 ![sketch](media/OpenCollarElephantEdge.jpg)
 (temporary image?)
 
-# Guide - Integrate EI to Project 15
+## Added to P15 in the Edge Impulse integration
 
-## Azure deploy
-
-Project 15 is quickly set up in Microsoft Azure by the provided ARM template. To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, the following changes will direct to the demo code:
-- url and branch in `PrivateModelRepo`
-- url for *webApp* and *functions* in `git-repo`
-
-## 1. Open ARM Template Deployment
-
-Click **Deploy to Azure** button below  
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSaraOlsson%2Fproject15%2Fmaster%2FEdge-Impulse-Guide%2Fazuredeploy.json" target="_blank"><img src="deploy-to-azure.svg"/></a>
-
-> [!TIP]  
-> Right click the button below and select **Open link in new tab** or **Open lin in new window**
-
-
-### Added to P15
+(IN PROGRESS)
 - Module in Web Portal for Edge Impulse connection and actions (UI + backend)
     - Sample project in Edge Impulse made public
 - File upload to P15 IoT Hub (via Azure Function)
-- (Functionallity to save telemetry to Storage Account and forward it to Edge Impulse) 
+- (Functionallity to save telemetry to Storage Account and forward it to Edge Impulse)
 
-**File upload (training data upload)**
+To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, the following changes will direct to the demo code:
+- url and branch in `PrivateModelRepo`
+- url for *webApp* and *functions* in `git-repo`
+
+**File upload/Telemetry (training data upload)**
 - Enable File Upload in IoT Hub by connecting a Storage Account to it. 
 - Use added function in `project15-openplatform-functions` HTTP endpoint
 
@@ -94,7 +80,34 @@ Click **Deploy to Azure** button below
 
 This endpoint makes a POST request to `http://ingestion.edgeimpulse.com/api/training/data`
 
-# Get Edge Impulse model 
+
+
+# Guide - Integrate EI to Project 15
+
+In this guide, the 
+
+## Azure deploy of Open Platform
+
+Project 15 is quickly set up in Microsoft Azure by the provided ARM template. Ajustments done is covered in the section *What is added to Open Platform in this version*
+
+## 1. Open ARM Template Deployment
+
+Click **Deploy to Azure** button below. (TIP: right click the button below and select *Open link in new tab/window*) 
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSaraOlsson%2Fproject15%2Fmaster%2FEdge-Impulse-Guide%2Fazuredeploy.json" target="_blank"><img src="deploy-to-azure.svg"/></a>
+
+
+## Plug and Play models
+
+# Guide "Edge Impulse with P15":
+    - Connect Edge Impulse Project
+    - Set EI model to device twin
+    - Edge Impulse CLI (special version):
+        - Stream training Telemetry
+        - Stream inference Telemetry
+    - Use Plug and Play (PnP) model
+
+## Get Edge Impulse model 
 
 (Download model from the Portal or backend)
 
@@ -102,19 +115,7 @@ Below are public made sample projects in the Edge Impulse Studio:
 
 - [p15-elephant-audio](https://studio.edgeimpulse.com/public/47961/latest)
 
-## Edge Impulse CLI
-
-Adjusted version at GitHub: [SaraOlsson/edge-impulse-cli](https://github.com/SaraOlsson/edge-impulse-cli)
-
-Two tools are added to the CLI
-- edge-impulse-az-data-forwarder
-- edge-impulse-run-impulse-az-forwarder
-Which both forwards the data to an endpoint in the Project 15 backend.
-
-![View EI runner in Project 15 Portal](media/ei-runner-to-p15-portal-maxScore-long.png)
-*View EI runner in Project 15 Portal. Using this, it is possible to get time series insights on metrics, like the maximim score value over time. The dashed line will inform about lack of data/connectivity.*
-
-## Edge Impulse API
+### Edge Impulse API
 
 In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-api), we can use the [download endpoint](https://docs.edgeimpulse.com/reference#downloadbuild), where the *type* parameter implies which microcontroller the firmware is built for, or what library the model is packaged as. 
 
@@ -125,7 +126,7 @@ In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-ap
     - *nordic-nrf52840-dk*  
     - *zip* for C++ library  
     - *openmv* for OpenMV library 
-    - *runner-linux-aarch64* for embedded Linux  
+    - *runner-linux-aarch64* for embedded Linux 
 
 ## Connect Edge Impulse Project
 
@@ -135,8 +136,62 @@ Choosing a model project will enable to
 - view model type and classes
 - build and prepare firmware for update of IoT device
 
-![sketch](media/ei-in-p15-1.png)
-(image will be updated)
+![sketch](media/connect-project.png)
+
+## Set EI model to device twin
+
+After being connected to an Edge Impulse project, choooe a device in the Device Selection and the *Add to device* button will be enabled. Pressing this button triggers a change in the deviceTwin tags section.
+
+![add to device twin](media/add-to-device.png)
+
+## Edge Impulse CLI (special version)
+
+Adjusted version at GitHub: [SaraOlsson/edge-impulse-cli](https://github.com/SaraOlsson/edge-impulse-cli)
+
+Two tools are added to the CLI
+- edge-impulse-az-data-forwarder
+- edge-impulse-run-impulse-az-forwarder
+Which both forwards the data to an endpoint in the Project 15 backend.
+
+To use this version of the Edge Impulse CLI, please see the README of the edge-impulse-cli repo linked above.
+
+### Stream training Telemetry
+
+Copy the device connection string from the P15 Portal (or directly from IoT Hub)
+
+```edge-impulse-az-data-forwarder```
+
+In the condig dialog, enter the device connection string.
+
+Go to Edge Impulse studio (a link will be shown in the termimal). Enter a label for the data that you want to collect and press *Start sampling* 
+
+![](media/traning-forwarder.png)
+![](media/az-data-forwarder.png)
+
+### Stream inference Telemetry
+
+> Note: if your devive as options to communicate directly with the cloud, you may implement Azure IoT Hub messaging directly in the firmware
+
+Flash inferece firmware to the device. For example, the export of the Edge Impulse pre-built firmware of the dk
+
+```edge-impulse-run-impulse-az-forwarder --classes <class1_class2_class3> --az-device <your-connectionstring>```
+
+<!-- 
+edge-impulse-run-impulse-az-forwarder --classes no_noise_unknown_yes --az-device HostName=P15-IoTHub-gkx6k.azure-devices.net;DeviceId=runner-forwarder-device;SharedAccessKey=61+uCly4eZuEaLjdH/ynnzRHoG7RvCESczKNsydJmP4= -->
+
+![View EI runner in Project 15 Portal](media/ei-runner-to-p15-portal-maxScore-long.png)
+*View EI runner in Project 15 Portal. Using this, it is possible to get time series insights on metrics, like the maximim score value over time. The dashed line will inform about lack of data/connectivity.*
+
+## Use Plug and Play (PnP) models
+
+- eidataforward-1.json
+- eirunnerforward-1.json
+
+Use to be compatible with Azure IoT Central and to get an understanding of the device firmware/hardware.
+In the P15 portal, it is beneficial to automatically get Time Series Insights in the P15 portal, or to send custom commands like the example shown below:
+
+![send command PnP](media/send-command.png)
+
 
 ## Plug and Play model
 

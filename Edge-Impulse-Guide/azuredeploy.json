@@ -317,7 +317,13 @@
                 "name": "DeviceTelemetryToEventHub-EP"
               }
             ],
-            "storageContainers": []
+            "storageContainers": [
+              {
+                "connectionString": "[concat('DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=',variables('storageName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), '2019-06-01').keys[0].value)]",
+                "name": "saved-telemetry",
+                "encoding": "json"
+              }
+            ]
           },
           "routes": [
             {
@@ -364,7 +370,16 @@
                 "DeviceTelemetryToEventHub-EP"
               ],
               "isEnabled": true
-            }
+            },
+            {
+              "name": "TelemetryRoute",
+              "source": "DeviceMessages",
+              "condition": "true",
+              "endpointNames": [
+                  "TelemetryEndpointJson"
+              ],
+              "isEnabled": true
+          }
           ],
           "fallbackRoute": {
             "name": "$fallback",
@@ -374,6 +389,13 @@
               "events"
             ],
             "isEnabled": true
+          }
+        },
+        "storageEndpoints": {
+          "$default": {
+              "connectionString": "[concat('DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=',variables('storageName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), '2019-06-01').keys[0].value)]",
+              "containerName": "file-upload",
+              "authenticationType": "keyBased"
           }
         },
         "messagingEndpoints": {

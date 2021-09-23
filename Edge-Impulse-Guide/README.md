@@ -76,7 +76,10 @@ The Edge Impulse firmware for this development board is open source and hosted o
 
 To demonstrate how it can be adjusted to the case of adding Edge Impulse models and in particlar the use case of SmartParks and their Elephant Collar, the following changes will direct to the demo code:
 - url and branch in `PrivateModelRepo`
+    - integration version is at [SaraOlsson/iot-plugandplay-models](https://github.com/SaraOlsson/iot-plugandplay-models)
 - url for *webApp* and *functions* in `git-repo`
+    - webapp integration version is at [SaraOlsson/project15-openplatform-webapp](https://github.com/SaraOlsson/project15-openplatform-webapp/tree/v0.83.EI)
+    - webapp function version is at [SaraOlsson/project15-openplatform-functions](https://github.com/SaraOlsson/project15-openplatform-functions) (TODO: update branch)
 
 **File upload/Telemetry (training data upload)**
 - Enable File Upload in IoT Hub by connecting a Storage Account to it. 
@@ -128,24 +131,26 @@ After being connected to an Edge Impulse project, choooe a device in the Device 
 
 ## Edge Impulse CLI (special version)
 
-Adjusted version at GitHub: [SaraOlsson/edge-impulse-cli](https://github.com/SaraOlsson/edge-impulse-cli)
+Adjusted version at GitHub: [SaraOlsson/edge-impulse-cli](https://github.com/SaraOlsson/edge-impulse-cli). To use this version of the Edge Impulse CLI, please see the README of the repo.
 
-Two tools are added to the CLI
-- edge-impulse-az-data-forwarder
-- edge-impulse-run-impulse-az-forwarder
+Three tools are added to the CLI
+- **edge-impulse-az-data-forwarder**
+- **edge-impulse-run-impulse-az-forwarder**  
 Which both forwards the data to an endpoint in the Project 15 backend.
-
-To use this version of the Edge Impulse CLI, please see the README of the edge-impulse-cli repo linked above.
+- **edge-impulse-az-device-runner**   
+Which is a sample toold on using the Azure device SDK directly
 
 ### Stream training Telemetry
 
-Copy the device connection string from the P15 Portal (or directly from IoT Hub)
+1. Copy the device connection string from the P15 Portal (or directly from IoT Hub)
 
 ```edge-impulse-az-data-forwarder```
 
-In the condig dialog, enter the device connection string.
+2. In the condig dialog, enter the device connection string.
 
-Go to Edge Impulse studio (a link will be shown in the termimal). Enter a label for the data that you want to collect and press *Start sampling* 
+3. Go to Edge Impulse studio (a link will be shown in the termimal). Enter a label for the data that you want to collect and press *Start sampling* 
+
+The telemetry will be streamed also to the IoT Hub of P15 and get a PnP model attached to it. In the P15 portal, metrics from the data can be visualized if they are of type *Double* or *Long*. 
 
 ![](media/traning-forwarder.png)
 ![](media/az-data-forwarder.png)
@@ -177,6 +182,16 @@ edge-impulse-run-impulse-az-forwarder --classes no_noise_unknown_yes --az-device
 ![update-diagram](media/diagram-telemetry.png)
 
 <!-- The dashed line will inform about lack of data/connectivity.* -->
+
+&nbsp;
+
+### Use Azure Device SDK in Edge Impulse CLI
+
+1. Copy the device connection string from the P15 Portal (or directly from IoT Hub)
+
+```edge-impulse-az-device-runner --az-device <your-connectionstring>```
+
+In the example CLI tool, the device client registers to listen to a **Command** that is defined in a Plug and Play model. That is, by mixing such logic with the other CLI tools like the data-forwarder, it is possible to manage data ingestion from the P15 portal. 
 
 &nbsp;
 
@@ -242,5 +257,7 @@ In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-ap
 Alternatives:
 - Azure IoT Hub integration at The Things Network
 - Use IoT Bridge by Azure (forward Lora messages with HTTP via Azure Function to IoT Hub) 
+
+Please see the [official documentation](https://www.thethingsindustries.com/docs/integrations/cloud-integrations/azure-iot-hub/) about the Azure IoT Hub integration at The Things Network, as well as the blob post *[First look: The Things Network new Azure IoT Hub integration](https://sandervandevelde.wordpress.com/2021/09/22/first-look-the-things-network-new-azure-iot-hub-integration/)* by Sander van de Velde.
 
 ![sketch](media/thethings.png)

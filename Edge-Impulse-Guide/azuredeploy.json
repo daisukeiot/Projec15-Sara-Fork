@@ -297,7 +297,8 @@
         "[resourceId('Microsoft.Resources/deployments', 'Deploy-IoT')]",
         "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubs').nameSpace)]",
         "[resourceId('Microsoft.EventHub/namespaces/authorizationRules', variables('eventHubs').nameSpace, 'GlobalSendOnlyRule')]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubs').nameSpace, variables('eventHubs').name, variables('eventHubs').ruleSend)]"
+        "[resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubs').nameSpace, variables('eventHubs').name, variables('eventHubs').ruleSend)]",
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageName'))]"
       ],
       "properties": {
         "ipFilterRules": [],

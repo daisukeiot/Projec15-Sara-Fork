@@ -149,8 +149,13 @@ Flash inferece firmware to the device. For example, the export of the Edge Impul
 <!-- 
 edge-impulse-run-impulse-az-forwarder --classes no_noise_unknown_yes --az-device HostName=P15-IoTHub-gkx6k.azure-devices.net;DeviceId=runner-forwarder-device;SharedAccessKey=61+uCly4eZuEaLjdH/ynnzRHoG7RvCESczKNsydJmP4= -->
 
-![View EI runner in Project 15 Portal](media/ei-runner-to-p15-portal-maxScore-long.png)
-*View EI runner in Project 15 Portal. Using this, it is possible to get time series insights on metrics, like the maximim score value over time. The dashed line will inform about lack of data/connectivity.*
+![GIF: EI runner in Project 15 Portal](media/p15-maxScore.gif)
+
+<!-- ![View EI runner in Project 15 Portal](media/ei-runner-to-p15-portal-maxScore-long.png) -->
+*View EI runner in Project 15 Portal. Using this, it is possible to get time series insights on metrics, like the maximum score value over time. 
+
+<!-- The dashed line will inform about lack of data/connectivity.* -->
+
 
 ## Use Plug and Play (PnP) models
 

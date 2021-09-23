@@ -23,13 +23,13 @@ Added to the Open Platform is the integration of TinyML models to the managed de
     - With serial connector
     - with BLE connect app
 
-
+Scenarios covered:
 ![sketch](media/ei-p15-2.png)
-(split to several and describe)
 
 ![sketch](media/sketch.png)
 (draft image)
 
+&nbsp;
 
 ## Train and production scenarios
 
@@ -48,6 +48,8 @@ These two scenarios are often relevant to the same project, the data collection 
 
 [Device communication protocols](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-protocols)
 
+&nbsp;
+
 ## Use case - SmartParks
 
 (draft) Edge Impulse works together with Smart Parks, Irnas and others to analyze motion and sound data of Elephants to classify and generate events. This adds another layer to the very efficient GPS tracking and LoRaWAN connectivity of the OpenCollar.
@@ -58,6 +60,11 @@ The Edge Impulse firmware for this development board is open source and hosted o
 
 ![sketch](media/OpenCollarElephantEdge.jpg)
 (temporary image?)
+
+![diagram-usecase](media/use-case-vs-general.png)
+(old image, replace but keep idea about use case VS in general)
+
+&nbsp;
 
 ## Added to P15 in the Edge Impulse integration
 
@@ -80,7 +87,7 @@ To demonstrate how it can be adjusted to the case of adding Edge Impulse models 
 
 This endpoint makes a POST request to `http://ingestion.edgeimpulse.com/api/training/data`
 
-
+&nbsp;
 
 # Guide - Integrate EI to Project 15
 
@@ -95,6 +102,7 @@ Click **Deploy to Azure** button below. (TIP: right click the button below and s
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSaraOlsson%2Fproject15%2Fmaster%2FEdge-Impulse-Guide%2Fazuredeploy.json" target="_blank"><img src="deploy-to-azure.svg"/></a>
 
+&nbsp;
 
 ## Connect Edge Impulse Project to P15
 
@@ -108,11 +116,15 @@ Choosing a model project will enable to
 
 ![sketch](media/connect-project.png)
 
+&nbsp;
+
 ## Set EI model to device twin
 
 After being connected to an Edge Impulse project, choooe a device in the Device Selection and the *Add to device* button will be enabled. Pressing this button triggers a change in the deviceTwin tags section.
 
 ![add to device twin](media/add-to-device.png)
+
+&nbsp;
 
 ## Edge Impulse CLI (special version)
 
@@ -138,9 +150,13 @@ Go to Edge Impulse studio (a link will be shown in the termimal). Enter a label 
 ![](media/traning-forwarder.png)
 ![](media/az-data-forwarder.png)
 
+&nbsp;
+
 ### Stream inference Telemetry
 
 > Note: if your devive as options to communicate directly with the cloud, you may implement Azure IoT Hub messaging directly in the firmware
+
+![update-diagram](media/diagram-run.png)
 
 Flash inferece firmware to the device. For example, the export of the Edge Impulse pre-built firmware of the dk
 
@@ -154,8 +170,15 @@ edge-impulse-run-impulse-az-forwarder --classes no_noise_unknown_yes --az-device
 <!-- ![View EI runner in Project 15 Portal](media/ei-runner-to-p15-portal-maxScore-long.png) -->
 *View EI runner in Project 15 Portal. Using this, it is possible to get time series insights on metrics, like the maximum score value over time. 
 
+## Save telemetry
+
+(TODO: write about saving telemetry)
+
+![update-diagram](media/diagram-telemetry.png)
+
 <!-- The dashed line will inform about lack of data/connectivity.* -->
 
+&nbsp;
 
 ## Use Plug and Play (PnP) models
 
@@ -173,6 +196,8 @@ In the P15 portal, it is beneficial to automatically get Time Series Insights in
 A PnP model describes what telemetry is expected and what actions can be made from cloud to device. An example of how the Elephant Edge collar device is easily managed with a PnP model is described.
 
 OpenCollarElephant model which is found at the [iot-plugandplay-models](https://github.com/SaraOlsson/iot-plugandplay-models/blob/main/dtmi/nordicsemi/OpenCollarElephant.json) repository
+
+&nbsp;
 
 ## Get Edge Impulse model 
 
@@ -195,11 +220,18 @@ In the [Edge Impulse API](https://docs.edgeimpulse.com/reference#edge-impulse-ap
     - *openmv* for OpenMV library 
     - *runner-linux-aarch64* for embedded Linux
 
+
+&nbsp;
+
 ## Update ML model/Firmware with BLE connect app
+
+![update-diagram](media/diagram-update.png)
 
 **Flashing firmware**
 - download built firmware from Edge Impulse or as library to build your custom firmware.
 - use microcontroller with Bluetooth or connect with over serial port.
+
+&nbsp;
 
 # SmartParks integration details
 
